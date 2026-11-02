@@ -1,0 +1,63 @@
+{
+  "BestStrong_semantics": "post-hoc per-case strongest certified lower bound; derived comparator, not an independent algorithm",
+  "CSD_MR": {
+    "acceptance_threshold": "parent certified lower bound minus numerical tolerance",
+    "beam_width": 2,
+    "candidate_budget_per_operator": 4,
+    "certified_LB_non_degradation": true,
+    "complete_recertification": true,
+    "duplicate_state_evidence_cache": true,
+    "horizon": 6,
+    "initial_state": "BestStrong",
+    "reference_mode": false,
+    "safe_valid_bound_precheck": true,
+    "time_limit_seconds_per_certification": 5.0,
+    "visits_per_depth": 4
+  },
+  "forbidden": [
+    "overwrite old results",
+    "post-result threshold changes",
+    "DD",
+    "LBBD",
+    "Branch-and-Certify",
+    "claim KMeans/Fiedler native reproduction",
+    "claim BestStrong independent sample"
+  ],
+  "initial_methods": [
+    "Random",
+    "KMeans-50m",
+    "Fiedler-50m",
+    "Coverage-first",
+    "PRM-ABS",
+    "UrbanInfrastructure-GA",
+    "FlyingRelay"
+  ],
+  "input_manifest_hash": "43A0563AD1DC0C1126675E2E3E7C81DA2A10FDFD835F0931ED71E6BC6C004E72",
+  "input_protocol_hash": "59C741D09DEE345991DD32998090EB69C0FBD80C1581D791D97245E76B0926BF",
+  "reimplementation_boundary": {
+    "Fiedler-50m": "recursive Fiedler partition of the relay-feasible candidate graph plus demand/network representative selection",
+    "KMeans-50m": "deterministic weighted Lloyd clustering plus one-to-one nearest-candidate assignment",
+    "old_executable_source_reused": false
+  },
+  "runner_hash": "9A93B63158BAA195F47E266955CE3DA3ADB2FCAF0C8510C4C55201B80D02E0B6",
+  "statistical_design": {
+    "case_count": 60,
+    "confirmatory_seeds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "development_seed": 0,
+    "paired_cluster": "terrain x infrastructure x seed"
+  },
+  "status": "FROZEN_BEFORE_FORMAL_RESULTS",
+  "strong_pool": [
+    "KMeans-50m",
+    "Fiedler-50m",
+    "Coverage-first",
+    "PRM-ABS",
+    "UrbanInfrastructure-GA",
+    "FlyingRelay"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "H": 6,
+  "M": 4,
+  "N_visit": 4,
+  "beam_width": 2,
+  "budget_semantics": "best-effort total certification wall-clock budget; observed overrun retained",
+  "confirmation_seeds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "created_for_date": "2026-09-08",
+  "ctks_stage_budget_seconds": 1.0,
+  "experiment": "CT-KS fair mechanism full comparison",
+  "highs_version": "not exposed by the installed SciPy interface",
+  "input_sha256": {
+    "csd_mr_search_trace.csv": "AB8B51E9AF7CE0E9595632BFEF8ED3E2EE2CC92ABC888B9643BB581275EB409A",
+    "formal_case_method_results.csv": "1AF9485CF0097E5689C58B8165EE40DF554FF8BB086F70C012F0C7AB6685AC12"
+  },
+  "methods": {
+    "ctks": {
+      "kernel": true,
+      "mip_rel_gap": 0.0,
+      "threshold_aware": true
+    },
+    "full_domain": {
+      "kernel": false,
+      "mip_rel_gap": 0.0,
+      "threshold_aware": false
+    },
+    "threshold_only": {
+      "kernel": false,
+      "mip_rel_gap": 0.0,
+      "threshold_aware": true
+    },
+    "threshold_relaxed_gap_1e-3": {
+      "kernel": false,
+      "mip_rel_gap": 0.001,
+      "threshold_aware": true
+    }
+  },
+  "nominal_per_candidate_budget_seconds": 5.0,
+  "outer_expected_runs": 576,
+  "python_version": "3.12.7",
+  "replay_expected_proposals": 564,
+  "replay_expected_runs": 6768,
+  "scipy_version": "1.13.1",
+  "solver_interface": "scipy.optimize.milp (bundled HiGHS)",
+  "solver_seed": 0,
+  "source_sha256": {
+    "scripts\\ctks_fair_certification.py": "5525F115465CCAA9EBE4173FCC2ACD4EB0E62316C4414A7B4A033884C6CAA0DC",
+    "scripts\\ctks_service_chain_kernel.py": "86D6E0ED10425FE97BFF496625DE80F4B71A1EEEA51A0E32ED0E81B1CB651176",
+    "scripts\\run_ctks_fair_mechanism_full.py": "177C99E7195FE68C114CBC0457CE5E43888E2C22A6472B261BD98A0804D3C08A",
+    "scripts\\run_ctks_fixed_candidate_replay.py": "B42BC19BFFA3CC58083CD00A559BAB16C3A79A8E93ECA9D645F8C2DF205526BE",
+    "scripts\\run_ctks_outer_search_gate.py": "D3EE1B2B3C1D29E9BFD761275BC135B8EEA4B489625639AAF7348C8EE15D19A2",
+    "scripts\\summarize_ctks_fair_mechanism_full.py": "A40A47483BDD748DF79C480C731D390D65C7813B162473E334935854688724EE"
+  },
+  "threads": 1
+}

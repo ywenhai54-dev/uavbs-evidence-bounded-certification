@@ -1,0 +1,136 @@
+schema_version: 1
+experiment_name: protocol_stack_csd_mr_go_v1
+
+paths:
+  experiment_root: outputs/protocol_stack
+  scenario_root: data/formal_inputs/scenarios
+  frozen_input_root: data/formal_inputs/scenarios
+  output_root: outputs/protocol_stack
+  guidance_root: null
+
+design:
+  K: 8
+  seeds: [0, 1, 2, 3, 4]
+  damage_levels: [low, medium, high]
+  terrains:
+    - id: S1
+      name: S1_Plain_POI_Rich
+    - id: S2
+      name: S2_Hilly_Balanced
+    - id: S3
+      name: S3_Rugged_Mountain_Saddle
+    - id: S4
+      name: S4_Valley_Canyon_Fresnel_Stress
+  expected_base_cases: 60
+
+geometry:
+  H_AGL_m: 300.0
+  H_AGL_sensitivity_m: [120.0, 200.0, 300.0]
+  access_radius_m: 1500.0
+  access_radius_sensitivity_m: [1000.0, 1500.0, 2000.0]
+  relay_radius_m: 4000.0
+  relay_radius_sensitivity_m: [3000.0, 4000.0, 5000.0]
+  backhaul_radius_m: 6000.0
+  backhaul_radius_sensitivity_m: [5000.0, 6000.0, 8000.0]
+  max_backhaul_edges_per_path: 2
+  max_relay_uavs_per_path: 1
+  max_backhaul_options_per_uav: 2
+  allow_relay_of_relay: false
+
+radio:
+  carrier_frequency_hz: 2400000000.0
+  access_bandwidth_hz: 20000000.0
+  relay_bandwidth_hz: 40000000.0
+  backhaul_bandwidth_hz: 40000000.0
+  uav_tx_power_dbm: 30.0
+  gbs_tx_power_dbm: 43.0
+  noise_density_dbm_per_hz: -174.0
+  receiver_noise_figure_db: 7.0
+  implementation_loss_db: 3.0
+  fresnel_clearance_ratio: 0.60
+  fresnel_intrusion_loss_db: 15.0
+  minimum_access_rate_mbps: 1.0
+  minimum_relay_rate_mbps: 5.0
+  minimum_backhaul_rate_mbps: 5.0
+  spectral_efficiency_cap_bps_hz: 6.0
+  scheduling_efficiency: 0.70
+
+capacity:
+  model: shared_link_and_node_capacity
+  capacity_factor: 1.0
+  capacity_main_mbps: 1400.0
+  capacity_sweep_mbps: [400.0, 600.0, 800.0, 1000.0, 1200.0, 1400.0, 1600.0, 1800.0]
+  uav_aggregate_capacity_mbps: 250.0
+  gbs_egress_capacity_mbps: 1000.0
+  nominal_total_demand_mbps:
+    low: 1000.0
+    medium: 1400.0
+    high: 1800.0
+
+infrastructure_state:
+  surviving_gbs_count:
+    low: 4
+    medium: 3
+    high: 2
+  anchor_selection:
+    strategy: high_first_max_min
+    primary_objective: spatial_dispersion
+    secondary_objective: demand_proximity
+    min_pair_distance_m: 1500.0
+    allow_spacing_relaxation_if_insufficient_candidates: true
+  anchor_nesting:
+    high_subset_of_medium: true
+    medium_subset_of_low: true
+  demand_hotspot_strength:
+    low: 0.15
+    medium: 0.50
+    high: 1.00
+  demand_hotspot_sigma_m: 1200.0
+  demand_hotspot_count: 3
+
+openbase:
+  adapter_settings:
+    prm_backhaul_weight: 0.30
+    urban_ga:
+      population: 32
+      generations: 24
+      crossover_probability: 0.80
+      mutation_probability: 0.12
+      elite_count: 4
+      tournament_size: 3
+    flying_relay:
+      network_weight: 0.60
+      relay_weight: 0.25
+      demand_weight: 0.15
+  PRM_ABS:
+    code_archive: null
+    paper: null
+  UrbanInfrastructure_GA:
+    code_archive: null
+    paper: null
+  FlyingRelay:
+    code_archive: null
+    paper: null
+
+csd_mr_go:
+  max_rounds: 2
+  candidate_eval_budget_per_round: 4
+  top_m_reduced_candidates: 12
+  acceptance_epsilon: 1.0e-9
+  random_seed_base: 61000
+
+guard_band:
+  risk_levels:
+    aggressive: 0.01
+    balanced: 0.04
+    conservative: 0.08
+  degradation_modes: [rate_degradation, blockage, mixed]
+  monte_carlo_samples: 4000
+  random_seed_base: 72000
+
+pipeline:
+  stages: [Exp2, Exp3, Exp4, Exp5, Exp6, Exp7, SuppA, SuppB]
+  fail_fast: true
+  require_zero_constraint_violation: true
+  require_finite_metrics: true
+  require_complete_figures: true
